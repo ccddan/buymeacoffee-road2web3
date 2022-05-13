@@ -6,15 +6,15 @@ const Home: NextPage = () => {
   return (
     <>
       <div className="bg-gray-50 min-h-screen m-0 pt-5">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:py-16 lg:px-8 lg:flex lg:items-center lg:justify-between">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:py-16 lg:px-8 lg:flex lg:items-center lg:justify-between sm:block">
           <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
             <span className="block">Do you like my work?</span>
             <span className="block text-indigo-600">
               &nbsp;&nbsp;&nbsp;&nbsp;Buy me a coffee!!
             </span>
           </h2>
-          <div className="mt-8 flex lg:mt-0 lg:flex-shrink-0">
-            <div className="inline-flex rounded-md shadow">
+          <div className="mt-8 flex lg:mt-0 lg:flex-shrink-0 sm:mb-20">
+            <div className="inline-flex rounded-md shadow sm:block sm:m-auto">
               <a
                 href="#"
                 className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700"
@@ -96,7 +96,7 @@ const Home: NextPage = () => {
         </div>
         <div className="mt-20 bg-pattern p-0 m-0 pb-40">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:py-16 lg:px-8 lg:flex lg:items-center lg:justify-between">
-            <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+            <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:pt-20">
               <span className="block">
                 &nbsp;&nbsp;&nbsp;&nbsp;Thanks for the Coffee!
               </span>
