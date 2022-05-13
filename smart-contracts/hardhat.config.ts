@@ -26,7 +26,11 @@ const accounts =
 
 const config: HardhatUserConfig = {
   solidity: "0.8.4",
+  defaultNetwork: "localhost",
   networks: {
+    localhost: {
+      chainId: 31337,
+    },
     goerli: {
       url: process.env.GOERLI_URL || undefinedParam,
       accounts,
