@@ -3,13 +3,13 @@ import { join } from "path";
 import { writeFileSync } from "fs";
 
 async function main() {
-  const contractName = "Greeter";
-  const Greeter = await ethers.getContractFactory(contractName);
-  const greeter = await Greeter.deploy("Hello, Hardhat!");
+  const contractName = "BuyMeACoffee";
+  const BuyCoffee = await ethers.getContractFactory(contractName);
+  const coffee = await BuyCoffee.deploy();
 
-  await greeter.deployed();
+  await coffee.deployed();
 
-  console.log("Greeter deployed to:", greeter.address);
+  console.log(`${contractName} deployed to:`, coffee.address);
 
   const exportFile = join(
     __dirname,
@@ -24,7 +24,7 @@ async function main() {
     `.addr-${new Date().toISOString()}.`
   );
   const fileData = JSON.stringify(
-    { name: contractName, addr: greeter.address },
+    { name: contractName, addr: coffee.address },
     null,
     2
   );
