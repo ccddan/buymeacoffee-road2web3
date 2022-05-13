@@ -60,7 +60,8 @@ describe("BuyMeACoffee", function () {
     await coffee.connect(senderAccount2).buyCoffee("yo2", "greetings again!!", {
       value: ethers.utils.parseEther("5"),
     });
-    await coffee.withdrawTips();
+    const txn = await coffee.withdrawTips();
+    await txn.wait();
 
     const finalBalance = +ethers.utils.formatEther(
       await ownerAccount.getBalance()
