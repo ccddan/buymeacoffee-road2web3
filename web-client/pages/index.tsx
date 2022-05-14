@@ -1,10 +1,16 @@
-import { useAccount, useContract, useContractEvent, useSigner } from "wagmi";
-import { useEffect, useState } from "react";
+import { Contract, ethers, utils } from "ethers";
+import {
+  useAccount,
+  useBalance,
+  useContract,
+  useContractEvent,
+  useSigner,
+} from "wagmi";
+import { useCallback, useEffect, useState } from "react";
 
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import type { NextPage } from "next";
 import config from "@config";
-import { ethers } from "ethers";
 
 function getETHFromCoffeeSize(size: string) {
   switch (size) {
@@ -22,6 +28,10 @@ function getETHFromCoffeeSize(size: string) {
 }
 
 const Home: NextPage = () => {
+  const [contractBalance, setContractBalance] = useState("");
+  const { data: contractData, refetch } = useBalance({
+    addressOrName: config.blockchain.contract.addr,
+  });
   const { data } = useAccount();
   const { data: signerData } = useSigner();
   const contract = useContract({
@@ -40,7 +50,37 @@ const Home: NextPage = () => {
       await loadMemos();
     }
   );
+  const loadMemosFn = useCallback(() => {
+    async function fn() {
+      console.log("getting memos...");
+      try {
+        const _memos = await contract.getMemos();
+        console.log("memos:", _memos);
+        setMemos(_memos);
+      } catch (error) {
+        console.warn("Failed to get memos:", error);
+      }
+    }
 
+    fn();
+  }, [contract]);
+
+  const isOwnerFn = useCallback(() => {
+    async function fn() {
+      console.log("check if wallet is the owner...");
+      try {
+        const owner = await contract.isOwner();
+        console.log("isOwner:", owner);
+        setIsOwner(owner);
+      } catch (error) {
+        console.warn("Failed to check if wallet is owner:", error);
+      }
+    }
+
+    fn();
+  }, [contract]);
+
+  const [isOwner, setIsOwner] = useState(false);
   const [memos, setMemos] = useState<any[]>([]);
   const [formInput, updateFormInput] = useState({
     name: "",
@@ -51,9 +91,13 @@ const Home: NextPage = () => {
 
   useEffect(() => {
     if (data && signerData && contract) {
-      loadMemos();
+      isOwnerFn();
+      loadMemosFn();
     }
-  }, [data, signerData, contract]);
+    if (contractData) {
+      setContractBalance(contractData.value.toString());
+    }
+  }, [data, signerData, contract, contractData, loadMemosFn, isOwnerFn]);
 
   async function loadMemos() {
     console.log("getting memos...");
@@ -75,6 +119,7 @@ const Home: NextPage = () => {
 
       console.log("Wait for tx to complete");
       await tx.wait();
+      console.log("completed");
 
       setTipSentName(formInput.name);
 
@@ -82,6 +127,24 @@ const Home: NextPage = () => {
         setTipSentName(null);
         clearTimeout(timer);
       }, 10000);
+    } catch (error) {
+      console.warn("Failed to send tip:", error);
+    }
+  }
+
+  async function claimTipsHandler() {
+    console.log("Claiming tips");
+    try {
+      let tx = await contract.withdrawTips();
+      console.log("Wait for tx to complete");
+
+      await tx.wait();
+      console.log("Withdraw complete!");
+
+      let { data: _contractData } = await refetch({
+        throwOnError: true,
+      });
+      if (_contractData) setContractBalance(_contractData.value.toString());
     } catch (error) {
       console.warn("Failed to send tip:", error);
     }
@@ -209,17 +272,37 @@ const Home: NextPage = () => {
             </div>
           </div>
         </div>
-        <div className="mt-20 bg-pattern p-0 m-0 pb-40">
+        <div className="mt-20 bg-pattern md:p-0 m-0 pb-40 pt-10">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:py-16 lg:px-8 lg:flex lg:items-center lg:justify-between">
             <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl pb-10 sm:pt-20">
               <span className="block">
-                &nbsp;&nbsp;&nbsp;&nbsp;Thanks for the Coffee!
+                &nbsp;&nbsp;&nbsp;&nbsp;Thank you{" "}
+                <b className="text-indigo-600">ALL</b> for the Coffee!
               </span>
             </h2>
+            {data && isOwner && contractBalance && (
+              <div className="flex flex-row justify-between pl-5 pr-5 content-center">
+                <p className="py-1">
+                  <b>
+                    Total Tips: {ethers.utils.formatEther(contractBalance)} ETH
+                  </b>
+                </p>
+                <button
+                  className="group relative flex justify-center py-2 px-4 border border-transparent font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  onClick={claimTipsHandler}
+                >
+                  Claim
+                </button>
+              </div>
+            )}
           </div>
           <div className="container max-w-md m-auto h-[500px] overflow-y-scroll px-5 pt-10">
-            {!memos.length && <p>Nothing to show here!</p>}
-            {memos.length > 0 && (
+            {(!data || !memos.length) && (
+              <p className="text-gray-400 m-auto text-center">
+                Nothing to show here!
+              </p>
+            )}
+            {data && memos.length > 0 && (
               <ol className="border-l-2 border-blue-600">
                 {memos.map((memo: any, idx: number, arr: any[]) => {
                   memo = arr[arr.length - (idx + 1)];
