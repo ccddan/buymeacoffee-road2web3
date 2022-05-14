@@ -8,6 +8,11 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "author": "ccddan",
+  "license": "ISC",
+  "repository": {
+    "url": "https://github.com/ccddan/buymeacoffee-road2web3.git"
+  },
   "dependencies": {
     "@heroicons/react": "^1.0.6",
     "@rainbow-me/rainbowkit": "^0.1.0",

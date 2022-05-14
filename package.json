@@ -1,5 +1,5 @@
 {
-  "name": "buymeacoffe",
+  "name": "buymeacoffee",
   "version": "0.0.1",
   "description": "Buy me a Coffe",
   "main": "index.js",
@@ -15,6 +15,9 @@
   ],
   "author": "ccddan",
   "license": "ISC",
+  "repository": {
+    "url": "https://github.com/ccddan/buymeacoffee-road2web3.git"
+  },
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.6",
     "@nomiclabs/hardhat-etherscan": "^3.0.3",
