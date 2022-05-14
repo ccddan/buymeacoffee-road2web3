@@ -37,6 +37,7 @@ const config: HardhatUserConfig = {
   defaultNetwork: "localhost",
   networks: {
     localhost: {
+      // hardhat
       chainId: 31337,
     },
     goerli: {

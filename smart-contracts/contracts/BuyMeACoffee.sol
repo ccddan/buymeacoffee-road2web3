@@ -25,6 +25,10 @@ contract BuyMeACoffee {
         owner = payable(msg.sender);
     }
 
+    function isOwner() public view returns (bool) {
+        return msg.sender == owner;
+    }
+
     /**
      * @dev fetch all stored memos
      */
