@@ -54,7 +54,7 @@ contract BuyMeACoffee {
     /**
      * @dev send the entire balance to the contract owner
      */
-    function withdrawTips() public {
+    function withdrawTips() public payable {
         require(address(this).balance > 0, "No tips to withdraw");
         require(owner.send(address(this).balance));
     }
