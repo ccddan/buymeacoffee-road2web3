@@ -1,9 +1,8 @@
-import { BuyMeACoffee } from "../typechain";
 import { ethers } from "hardhat";
 import { expect } from "chai";
 
 describe("BuyMeACoffee", function () {
-  let coffee: BuyMeACoffee;
+  let coffee: any;
 
   this.beforeAll(async () => {
     const Coffee = await ethers.getContractFactory("BuyMeACoffee");
