@@ -6,7 +6,7 @@ export const config = {
     mode: "development",
     network: {
       "ethereum-goerli": {
-        host: process.env.NEXT_PUBLIC_POLYGON_MUMBAI_URL || "not-defined",
+        host: process.env.NEXT_PUBLIC_GOERLI_URL || "not-defined",
         chainId: 420,
         networkId: 420,
       },
