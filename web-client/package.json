@@ -8,7 +8,8 @@
     "export": "next export",
     "start": "next start",
     "lint": "next lint",
-    "release": "npm run build && npm run export && cp -r out/* ../artifacts/web-client"
+    "release": "npm run build && npm run export",
+    "artifacts": "cp -r out/* ../artifacts/web-client"
   },
   "keywords": [
     "Solidity",
