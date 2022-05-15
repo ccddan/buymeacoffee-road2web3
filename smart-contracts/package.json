@@ -3,7 +3,11 @@
   "version": "0.1.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "hh": "hardhat",
+    "lint": "eslint '**/*.{js,ts}' && prettier '**/*.{json,sol,md}' --check && solhint 'contracts/**/*.sol'",
+    "compile": "hardhat compile",
+    "test": "REPORT_GAS=true hardhat test --network hardhat",
+    "artifacts": "cp -r artifacts/contracts/* ../artifacts/smart-contracts"
   },
   "keywords": [
     "Solidity",
