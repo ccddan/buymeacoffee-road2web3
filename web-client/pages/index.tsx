@@ -334,11 +334,12 @@ const Home: NextPage = () => {
           </div>
         </div>
         <footer className="text-center text-white">
-          <div className="container pt-9">
+          <div className="container pt-9 m-auto">
             <div className="flex justify-center mb-9">
               <a
                 href="https://twitter.com/AlchemyPlatform"
                 target="_blank"
+                rel="noreferrer"
                 className="mr-9 text-gray-800"
               >
                 <svg
@@ -360,6 +361,7 @@ const Home: NextPage = () => {
               <a
                 href="https://www.linkedin.com/company/alchemyinc"
                 target="_blank"
+                rel="noreferrer"
                 className="mr-9 text-gray-800"
               >
                 <svg
@@ -381,6 +383,7 @@ const Home: NextPage = () => {
               <a
                 href="https://github.com/ccddan/buymeacoffee-road2web3"
                 target="_blank"
+                rel="noreferrer"
                 className="text-gray-800"
               >
                 <svg
