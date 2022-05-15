@@ -56,6 +56,6 @@ contract BuyMeACoffee {
      */
     function withdrawTips() public payable {
         require(address(this).balance > 0, "No tips to withdraw");
-        require(owner.send(address(this).balance));
+        require(owner.send(address(this).balance), "Failed to claim tips");
     }
 }
