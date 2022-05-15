@@ -1,5 +1,5 @@
 {
-  "name": "buymeacoffee",
+  "name": "buymeacoffee-web-client",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -10,6 +10,13 @@
     "lint": "next lint",
     "release": "npm run build && npm run export && cp -r out/* ../artifacts/web-client"
   },
+  "keywords": [
+    "Solidity",
+    "Ethereum",
+    "Smart",
+    "Contracts",
+    "Hardhat"
+  ],
   "author": "ccddan",
   "license": "ISC",
   "repository": {
