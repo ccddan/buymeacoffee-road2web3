@@ -1,4 +1,3 @@
-import { Contract, ethers, utils } from "ethers";
 import {
   useAccount,
   useBalance,
@@ -9,8 +8,10 @@ import {
 import { useCallback, useEffect, useState } from "react";
 
 import { ConnectButton } from "@rainbow-me/rainbowkit";
+import Image from "next/image";
 import type { NextPage } from "next";
 import config from "@config";
+import { ethers } from "ethers";
 
 function getETHFromCoffeeSize(size: string) {
   switch (size) {
@@ -407,11 +408,15 @@ const Home: NextPage = () => {
 
           <div className="flex text-gray-700 p-4 items-center justify-center">
             © 2022 Road to Web3 by
-            <a className="text-gray-800 ml-5" href="https://www.alchemy.com/">
-              <img
+            <a
+              className="text-gray-800 ml-5 pt-2"
+              href="https://www.alchemy.com/"
+            >
+              <Image
                 src="https://assets-global.website-files.com/5f973c970bea5548ad4287ef/6088f4c7c34ad61ab10cdf72_horizontal-logo-onecolor-neutral-alchemy.svg"
                 alt="Alchemy"
                 width={100}
+                height={20}
               />
             </a>
           </div>
