@@ -17,7 +17,7 @@ function getETHFromCoffeeSize(size: string) {
   switch (size) {
     case "small":
       return ethers.utils.parseEther("0.00001");
-    case "small":
+    case "medium":
       return ethers.utils.parseEther("0.0001");
     case "big":
       return ethers.utils.parseEther("0.001");
