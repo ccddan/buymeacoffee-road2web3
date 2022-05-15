@@ -5,8 +5,10 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "export": "next export",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "release": "npm run build && npm run export && cp -r out/* ../artifacts/web-client"
   },
   "author": "ccddan",
   "license": "ISC",
